@@ -9,16 +9,16 @@ function attachProps (prevalenceData, wildType) {
     aminoAcid,
     ...props,
     isWildType: wildType[position - 1] === aminoAcid
-  }))
+  })).filter(({position}) => position > 690);
 }
 
 function prevalenceDataFilter (
   prevalenceData, requiredGene, requiredSubtype, requiredRxType, minimalPercent) {
   return prevalenceData.filter(({gene, subtype, rxType, percent, aminoAcid}) => (
     requiredGene === gene &&
-    requiredSubtype === subtype &&
-    requiredRxType === rxType &&
-    percent > minimalPercent &&
+    // requiredSubtype === subtype &&
+    // requiredRxType === rxType &&
+    // percent > minimalPercent &&
     ['X', '*'].indexOf(aminoAcid) === -1))
 }
 
