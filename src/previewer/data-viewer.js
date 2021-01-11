@@ -9,7 +9,9 @@ function attachProps (prevalenceData, wildType) {
     aminoAcid,
     ...props,
     isWildType: wildType[position - 1] === aminoAcid
-  })).filter(({position}) => position > 690);
+  })
+  ).filter(({position}) => !(position < 687 || position > 1273)
+  );
 }
 
 function prevalenceDataFilter (
@@ -18,7 +20,7 @@ function prevalenceDataFilter (
     requiredGene === gene &&
     // requiredSubtype === subtype &&
     // requiredRxType === rxType &&
-    // percent > minimalPercent &&
+    percent > minimalPercent &&
     ['X', '*'].indexOf(aminoAcid) === -1))
 }
 
@@ -93,7 +95,7 @@ export default class PrevalenceViewer extends React.Component {
 
   render () {
     const {prevalenceData, wildType, sitesPerRow, gene, subtype} = this.props
-    const minimalPercent = 1
+    const minimalPercent = 0.05
     const indelsMap = makeIndelsMap(prevalenceData, gene, subtype, 'naive', minimalPercent)
     const chunks = makeChunks(
       groupPrevalenceDataByPosition(
