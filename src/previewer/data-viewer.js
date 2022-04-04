@@ -18,7 +18,7 @@ function prevalenceDataFilter (
     requiredGene === gene &&
     requiredSubtype === subtype &&
     requiredRxType === rxType &&
-    percent > minimalPercent &&
+    percent >= minimalPercent &&
     ['X', '*'].indexOf(aminoAcid) === -1))
 }
 
@@ -93,12 +93,12 @@ export default class PrevalenceViewer extends React.Component {
 
   render () {
     const {prevalenceData, wildType, sitesPerRow, gene, subtype} = this.props
-    const minimalPercent = 1
-    const indelsMap = makeIndelsMap(prevalenceData, gene, subtype, 'naive', minimalPercent)
+    const minimalPercent = 0.1
+    const indelsMap = makeIndelsMap(prevalenceData, gene, subtype, 'all', minimalPercent)
     const chunks = makeChunks(
       groupPrevalenceDataByPosition(
         attachProps(
-          prevalenceDataFilter(prevalenceData, gene, subtype, 'naive', minimalPercent),
+          prevalenceDataFilter(prevalenceData, gene, subtype, 'all', minimalPercent),
           wildType || ''
         )
       ), sitesPerRow)
@@ -128,9 +128,10 @@ export default class PrevalenceViewer extends React.Component {
                  className={style['prevalence-viewer_value']}
                  data-is-wild-type={isWildType}
                  data-pcnt-lg={
-                   percent > 50 ? 50
-                     : percent > 10 ? 10
-                       : percent > 1 ? 1 : 0
+                   percent >= 50 ? 50
+                     : percent >= 10 ? 10
+                       : percent >= 1 ? 1
+                        : percent >= 0.1 ? 0.1 : 0
                  }>
                   {aminoAcid}
                   <sup className={style['percent']}>{smartRound(percent)}</sup>

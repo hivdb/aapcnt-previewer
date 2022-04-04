@@ -10,8 +10,8 @@ export default class Previewer extends React.Component {
       wildType: null,
       regionData: null,
       prevalenceDataLoaded: false,
-      gene: 'IN',
-      subtype: 'All'
+      gene: 'capsid',
+      subtype: 'all'
     }
   }
 

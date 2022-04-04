@@ -59,12 +59,18 @@
 
 .prevalence-viewer_value[data-pcnt-lg="10"] {
   font-weight: 400;
-  color: #e53935;
+  color: #1e88e5;
 }
 
 .prevalence-viewer_value[data-pcnt-lg="1"] {
   font-weight: 300;
-  color: #1e88e5;
+  color: #e53935;
+
+}
+
+.prevalence-viewer_value[data-pcnt-lg="0.1"] {
+  font-weight: 300;
+  color: #e5c11e;
 }
 
 .prevalence-viewer_value[data-pcnt-lg="0"] {
@@ -101,7 +107,7 @@
     font-size: 0.5rem;
     line-height: 1.1em;
   }
-  
+
   .prevalence-viewer_value {
     font-size: 0.6rem;
     line-height: 1.2em;
