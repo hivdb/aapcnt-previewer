@@ -8,6 +8,18 @@
   margin-bottom: 2px;
 }
 
+.prevalence-viewer_struct_domain {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-top: 1px solid;
+  border-left: 1px solid;
+  border-right: 1px solid;
+  font-weight: bold;
+  font-size: 1.2em;
+  text-align: center;
+  color: #783535;
+}
+
 .prevalence-viewer_bar .prevalence-viewer_cell {
   border-bottom: 1px solid black;
 }
@@ -16,6 +28,7 @@
   visibility: hidden;
 }
 
+.prevalence-viewer_struct,
 .prevalence-viewer_bar,
 .prevalence-viewer_row {
   display: flex;
