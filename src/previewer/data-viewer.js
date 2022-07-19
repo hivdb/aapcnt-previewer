@@ -182,10 +182,11 @@ export default class PrevalenceViewer extends React.Component {
                  className={style['prevalence-viewer_value']}
                  data-is-wild-type={isWildType}
                  data-pcnt-lg={
-                   percent >= 50 ? 50
-                     : percent >= 10 ? 10
-                       : percent >= 1 ? 1
-                        : percent >= 0.1 ? 0.1 : 0
+                   percent >= 90 ? 90
+                     : percent >= 50 ? 50
+                      : percent >= 10 ? 10
+                        : percent >= 1 ? 1
+                          : percent >= 0.1 ? 0.1 : 0
                  }>
                   {aminoAcid}
                   <sup className={style['percent']}>{smartRound(percent)}</sup>

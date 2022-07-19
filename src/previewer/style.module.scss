@@ -70,6 +70,11 @@
   color: #0b0b0b;
 }
 
+.prevalence-viewer_value[data-pcnt-lg="50"] {
+  font-weight: 800;
+  color: #0e5da2;
+}
+
 .prevalence-viewer_value[data-pcnt-lg="10"] {
   font-weight: 400;
   color: #1e88e5;
@@ -91,7 +96,7 @@
   color: #66bb6a;
 }
 
-[data-cells-per-row="90"] .prevalence-viewer_cell {
+[data-cells-per-row="50"] .prevalence-viewer_cell {
   flex-basis: 2%;
   max-width: 2%;
 }
