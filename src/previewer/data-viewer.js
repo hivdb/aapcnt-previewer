@@ -183,7 +183,6 @@ export default class PrevalenceViewer extends React.Component {
                  data-is-wild-type={isWildType}
                  data-pcnt-lg={
                    percent >= 90 ? 90
-                     : percent >= 50 ? 50
                       : percent >= 10 ? 10
                         : percent >= 1 ? 1
                           : percent >= 0.1 ? 0.1 : 0
