@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useDebugValue } from 'react'
 import PropTypes from 'prop-types'
 
 import style from './style.module.scss'
+import {get_domain_mark, get_lena_pos_mark} from './viz';
 
 function attachProps (prevalenceData, wildType) {
   return prevalenceData.map(({position, aminoAcid, ...props}) => ({
@@ -88,11 +89,43 @@ export default class PrevalenceViewer extends React.Component {
   }
 
   static defaultProps = {
-    sitesPerRow: 50
+    sitesPerRow: 50,
+    struct_domain: [
+      [1, 13, 'β hairpin'],
+      [17, 30, 'α1'],
+      [36, 43, 'α2'],
+      [49, 57, 'α3'],
+      [63, 83, 'α4'],
+      [82, 93, 'loop'],
+      [101, 104, 'α5'],
+      [111, 119, 'α6'],
+      [126, 145, 'α7'],
+      // [150, 152, '3-10 helix'],
+      [161, 173, 'α8'],
+      [179, 192, 'α9'],
+      [196, 205, 'α10'],
+      [211, 217, 'α11'],
+    ],
+    func_domain: [
+
+      [85, 93, 'CypA'],
+      [146, 150, 'interdomain linker region'],
+      [153, 172, 'major homology region'],
+    ],
+    lena_pos: {
+      'resist': [
+        56, 66, 67, 70, 74, 105, 107
+      ],
+      'pocket': [
+        50, 53, 54, 57, 63, 69,
+        73, 106, 130, 37,
+        38, 41, 135, 169, 172, 173, 179, 182
+      ]
+    }
   }
 
   render () {
-    const {prevalenceData, wildType, sitesPerRow, gene, subtype} = this.props
+    const {prevalenceData, wildType, sitesPerRow, gene, subtype, struct_domain, func_domain, lena_pos} = this.props
     const minimalPercent = 0.1
     const indelsMap = makeIndelsMap(prevalenceData, gene, subtype, 'all', minimalPercent)
     const chunks = makeChunks(
@@ -102,63 +135,24 @@ export default class PrevalenceViewer extends React.Component {
           wildType || ''
         )
       ), sitesPerRow)
-    const domain = [
-      [85, 93, 'CypA'],
-      [146, 150, 'IDR'],
-      [153, 172, 'MHR']
-    ]
 
     return <div className={style['prevalence-viewer']} data-cells-per-row={sitesPerRow}>
       {chunks.map((chunk, idx) => [
+        <div className={style['prevalence-viewer_struct']} key={`func-${idx}`}>
+        {
+          get_domain_mark(chunk, sitesPerRow, func_domain, 'prevalence-viewer_func_domain')
+        }
+        </div>,
         <div className={style['prevalence-viewer_struct']} key={`struct-${idx}`}>
           {
-            (() => {
-              let pos_list = chunk.map(([pos]) => {
-                return parseInt(pos);
-              })
-              let start = Math.min(...pos_list);
-              let stop = Math.max(...pos_list);
-
-              let sel_domain = domain.filter(([s1, s2, n]) => {
-                for (let pos of pos_list) {
-                  if ((pos >= s1) && (pos <= s2)) {
-                    return true;
-                  }
-                }
-                return false;
-              })
-
-              // console.log(sel_domain);
-              if (sel_domain.length === 0) {
-                return <></>;
-              }
-
-              var divs = [];
-              sel_domain.map(([s1, s2, n], idx) => {
-                let b = s1;
-                let e = s2;
-                if (s1 < start) {
-                  b = start;
-                }
-                if (s2 > stop) {
-                  e = stop;
-                }
-                if (divs.length === 0) {
-                  let blank_start_pcnt = (((b - 1) % sitesPerRow) * 100 / sitesPerRow) + '%';
-                  divs.push(<div style={{width: blank_start_pcnt}} key={0}></div>)
-                }
-                let pcnt = ((e + 1 - b) * 100 / sitesPerRow - 1) + '%';
-                console.log(n, b, e);
-                divs.push(<div style={{width: '0.5%'}} key={idx + 20}></div>)
-                divs.push(<div className={style['prevalence-viewer_struct_domain']} style={{width: pcnt}} key={idx+1}>{n}</div>)
-                divs.push(<div style={{width: '0.5%'}} key={idx + 30}></div>)
-                return n;
-              });
-
-              return divs;
-            })()
+            get_domain_mark(chunk, sitesPerRow, struct_domain, 'prevalence-viewer_struct_domain')
           }
         </div>,
+        <div className={style['prevalence-viewer_struct']} key={`lena-${idx}`}>
+        {
+          get_lena_pos_mark(chunk, sitesPerRow, lena_pos)
+        }
+      </div>,
         <div className={style['prevalence-viewer_bar']} key={`bar-${idx}`}>
           {chunk.map(([position]) => (
             <div key={position} className={style['prevalence-viewer_cell']}>
