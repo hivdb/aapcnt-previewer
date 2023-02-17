@@ -63,25 +63,27 @@ export function get_domain_mark(chunk, sitesPerRow, preset_domain, style_name) {
 }
 
 
-export function get_lena_pos_mark(chunk, sitesPerRow, lena_pos) {
+export function get_special_pos_mark(chunk, sitesPerRow, special_pos) {
     let pos_list = chunk.map(([pos]) => {
         return parseInt(pos);
     })
     let start = Math.min(...pos_list);
     let stop = Math.max(...pos_list);
 
-    lena_pos = lena_pos['resist'].map((pos) => {
-        return [pos, 'resist']
-    }).concat(lena_pos['pocket'].map((pos) => {
-        return [pos, 'pocket']
+    special_pos = special_pos['lena_resist'].map((pos) => {
+        return [pos, 'lena_resist']
+    }).concat(special_pos['lena_pocket'].map((pos) => {
+        return [pos, 'lena_pocket']
+    })).concat(special_pos['hla_pos'].map((pos) => {
+        return [pos, 'hla_pos']
     }))
-    lena_pos.sort(([pos1, c1], [pos2, c2]) => {
+    special_pos.sort(([pos1, c1], [pos2, c2]) => {
         return pos1 - pos2
     })
 
     var divs = []
     var scanned_pos = 0
-    lena_pos.map(([pos, category]) => {
+    special_pos.map(([pos, category]) => {
         if (pos < start || pos > stop) {
             return;
         }
@@ -98,8 +100,10 @@ export function get_lena_pos_mark(chunk, sitesPerRow, lena_pos) {
         }
 
         let style_name = 'prevalence-view_lena_pocket'
-        if (category === 'resist') {
+        if (category === 'lena_resist') {
             style_name = 'prevalence-view_lena_resist'
+        } else if (category === 'hla_pos') {
+            style_name = 'prevalence-view_hla_pos'
         }
         divs.push(
         <div style={{width: pcnt + '%'}} key={pos}>

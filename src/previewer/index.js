@@ -11,7 +11,7 @@ export default class Previewer extends React.Component {
       regionData: null,
       prevalenceDataLoaded: false,
       gene: 'capsid',
-      subtype: 'all'
+      subtype: 'main'
     }
   }
 

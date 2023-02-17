@@ -2,7 +2,7 @@ import React, { useDebugValue } from 'react'
 import PropTypes from 'prop-types'
 
 import style from './style.module.scss'
-import {get_domain_mark, get_lena_pos_mark} from './viz';
+import {get_domain_mark, get_special_pos_mark} from './viz';
 
 function attachProps (prevalenceData, wildType) {
   return prevalenceData.map(({position, aminoAcid, ...props}) => ({
@@ -112,20 +112,26 @@ export default class PrevalenceViewer extends React.Component {
       [146, 150, 'interdomain linker region'],
       [153, 172, 'major homology region'],
     ],
-    lena_pos: {
-      'resist': [
+    special_pos: {
+      'lena_resist': [
         56, 66, 67, 70, 74, 105, 107
       ],
-      'pocket': [
+      'lena_pocket': [
         // 50, 53, 54, 57, 63, 69,
         // 73, 106, 130, 37,
         // 38, 41, 135, 169, 172, 173, 179, 182
+      ],
+      'hla_pos': [
+        11, 14, 15, 31, 36, 41, 45, 50, 54, 68, 86, 91, 96, 110, 115, 116, 128,
+        132, 148, 170, 171, 178, 180, 183, 207, 225, 230,
       ]
-    }
+    },
   }
 
   render () {
-    const {prevalenceData, wildType, sitesPerRow, gene, subtype, struct_domain, func_domain, lena_pos} = this.props
+    const {
+      prevalenceData, wildType, sitesPerRow, gene, subtype,
+      struct_domain, func_domain, special_pos} = this.props
     const minimalPercent = 0.1
     const indelsMap = makeIndelsMap(prevalenceData, gene, subtype, 'all', minimalPercent)
     const chunks = makeChunks(
@@ -150,7 +156,7 @@ export default class PrevalenceViewer extends React.Component {
         </div>,
         <div className={style['prevalence-viewer_struct']} key={`lena-${idx}`}>
         {
-          get_lena_pos_mark(chunk, sitesPerRow, lena_pos)
+          get_special_pos_mark(chunk, sitesPerRow, special_pos)
         }
       </div>,
         <div className={style['prevalence-viewer_bar']} key={`bar-${idx}`}>
