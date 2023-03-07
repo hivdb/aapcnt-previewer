@@ -145,9 +145,9 @@ export default class PrevalenceViewer extends React.Component {
     return <div className={style['prevalence-viewer']} data-cells-per-row={sitesPerRow}>
       {chunks.map((chunk, idx) => [
         <div className={style['prevalence-viewer_struct']} key={`func-${idx}`}>
-        {
-          get_domain_mark(chunk, sitesPerRow, func_domain, 'prevalence-viewer_func_domain')
-        }
+          {
+            get_domain_mark(chunk, sitesPerRow, func_domain, 'prevalence-viewer_func_domain')
+          }
         </div>,
         <div className={style['prevalence-viewer_struct']} key={`struct-${idx}`}>
           {
@@ -155,10 +155,10 @@ export default class PrevalenceViewer extends React.Component {
           }
         </div>,
         <div className={style['prevalence-viewer_struct']} key={`lena-${idx}`}>
-        {
-          get_special_pos_mark(chunk, sitesPerRow, special_pos)
-        }
-      </div>,
+          {
+            get_special_pos_mark(chunk, sitesPerRow, special_pos)
+          }
+        </div>,
         <div className={style['prevalence-viewer_bar']} key={`bar-${idx}`}>
           {chunk.map(([position]) => (
             <div key={position} className={style['prevalence-viewer_cell']}>
@@ -183,9 +183,9 @@ export default class PrevalenceViewer extends React.Component {
                  data-is-wild-type={isWildType}
                  data-pcnt-lg={
                    percent >= 90 ? 90
-                      : percent >= 10 ? 10
-                        : percent >= 1 ? 1
-                          : percent >= 0.1 ? 0.1 : 0
+                     : percent >= 10 ? 10
+                       : percent >= 1 ? 1
+                         : percent >= 0.1 ? 0.1 : 0
                  }>
                   {aminoAcid}
                   <sup className={style['percent']}>{smartRound(percent)}</sup>

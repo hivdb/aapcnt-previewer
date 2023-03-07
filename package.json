@@ -3,11 +3,11 @@
   "version": "0.2.0",
   "private": true,
   "dependencies": {
-    "icosa": "git+https://github.com/hivdb/icosa.git#ac42266",
-    "node-sass": "^4.11.0",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-scripts": "3.0.0"
+    "icosa": "git+https://github.com/hivdb/icosa.git#5472e06",
+    "node-sass": "^8.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "^5.0.1"
   },
   "scripts": {
     "start": "react-scripts start",

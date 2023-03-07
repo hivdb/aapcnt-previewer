@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {readFile} from 'icosa/src/file'
+import readFile from 'icosa/utils/read-file'
 import style from './style.module.scss'
 
 class FileInput extends React.Component {

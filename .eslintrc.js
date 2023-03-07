@@ -4,7 +4,7 @@ module.exports = {
     'es6': true
   },
   'extends': [
-    'standard',
+    "eslint:recommended",
     'eslint-config-react-app'
   ],
   'parserOptions': {
