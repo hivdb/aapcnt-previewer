@@ -91,30 +91,30 @@ export default class PrevalenceViewer extends React.Component {
   static defaultProps = {
     sitesPerRow: 50,
     struct_domain: [
-      [1, 13, 'β hairpin'],
-      [17, 30, 'α1'],
-      [36, 43, 'α2'],
-      [49, 57, 'α3'],
-      [63, 83, 'α4'],
-      [82, 93, 'loop'],
-      [101, 104, 'α5'],
-      [111, 119, 'α6'],
-      [126, 145, 'α7'],
-      // [150, 152, '3-10 helix'],
-      [161, 173, 'α8'],
-      [179, 192, 'α9'],
-      [196, 205, 'α10'],
-      [211, 217, 'α11'],
+      // [1, 13, 'β hairpin'],
+      // [17, 30, 'α1'],
+      // [36, 43, 'α2'],
+      // [49, 57, 'α3'],
+      // [63, 83, 'α4'],
+      // [82, 93, 'loop'],
+      // [101, 104, 'α5'],
+      // [111, 119, 'α6'],
+      // [126, 145, 'α7'],
+      // // [150, 152, '3-10 helix'],
+      // [161, 173, 'α8'],
+      // [179, 192, 'α9'],
+      // [196, 205, 'α10'],
+      // [211, 217, 'α11'],
     ],
     func_domain: [
 
-      [85, 93, 'CypA'],
-      [146, 150, 'interdomain linker region'],
-      [153, 172, 'major homology region'],
+      // [85, 93, 'CypA'],
+      // [146, 150, 'interdomain linker region'],
+      // [153, 172, 'major homology region'],
     ],
     special_pos: {
       'lena_resist': [
-        56, 66, 67, 70, 74, 105, 107
+        // 56, 66, 67, 70, 74, 105, 107
       ],
       'lena_pocket': [
         // 50, 53, 54, 57, 63, 69,
@@ -122,8 +122,8 @@ export default class PrevalenceViewer extends React.Component {
         // 38, 41, 135, 169, 172, 173, 179, 182
       ],
       'hla_pos': [
-        11, 14, 15, 31, 36, 41, 45, 50, 54, 68, 86, 91, 96, 110, 115, 116, 128,
-        132, 148, 170, 171, 178, 180, 183, 207, 225, 230,
+        // 11, 14, 15, 31, 36, 41, 45, 50, 54, 68, 86, 91, 96, 110, 115, 116, 128,
+        // 132, 148, 170, 171, 178, 180, 183, 207, 225, 230,
       ]
     },
   }
@@ -155,9 +155,9 @@ export default class PrevalenceViewer extends React.Component {
           }
         </div>,
         <div className={style['prevalence-viewer_struct']} key={`lena-${idx}`}>
-          {
+          {/* {
             get_special_pos_mark(chunk, sitesPerRow, special_pos)
-          }
+          } */}
         </div>,
         <div className={style['prevalence-viewer_bar']} key={`bar-${idx}`}>
           {chunk.map(([position]) => (
