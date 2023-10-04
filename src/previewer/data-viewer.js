@@ -132,7 +132,7 @@ export default class PrevalenceViewer extends React.Component {
     const {
       prevalenceData, wildType, sitesPerRow, gene, subtype,
       struct_domain, func_domain, special_pos} = this.props
-    const minimalPercent = 0.1
+    const minimalPercent = 0.01
     const indelsMap = makeIndelsMap(prevalenceData, gene, subtype, 'all', minimalPercent)
     const chunks = makeChunks(
       groupPrevalenceDataByPosition(
@@ -185,7 +185,8 @@ export default class PrevalenceViewer extends React.Component {
                    percent >= 90 ? 90
                      : percent >= 10 ? 10
                        : percent >= 1 ? 1
-                         : percent >= 0.1 ? 0.1 : 0
+                         : percent >= 0.1 ? 0.1
+                           : percent >= 0.01 ? 0.01 : 0
                  }>
                   {aminoAcid}
                   <sup className={style['percent']}>{smartRound(percent)}</sup>

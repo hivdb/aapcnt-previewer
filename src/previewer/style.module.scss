@@ -133,6 +133,11 @@
   color: #c2c2c2;
 }
 
+.prevalence-viewer_value[data-pcnt-lg="0.01"] {
+  font-weight: 800;
+  color: #477079;
+}
+
 .prevalence-viewer_value[data-pcnt-lg="0"] {
   font-weight: 800;
   color: #ff0000;
